@@ -57,4 +57,37 @@ public class FlywayTest {
 		assertEquals(asList("Orwell", "Orwell", "Coelho", "Coelho"), result.getValues(AUTHOR.LAST_NAME));
 		assertEquals(asList("1984", "Animal Farm", "O Alquimista", "Brida"), result.getValues(BOOK.TITLE));
 	}
+
+	@Test
+	public void test1() {
+		String sql = "select ac.username as acc_user, ro.role_id as role_user from accounts ac join account_roles ro on ac.user_id = ro.user_id";
+
+		Parser parser = DSL.using(SQLDialect.MYSQL).parser();
+		Queries qq = parser.parse(sql);
+		Query query = parser.parseQuery(sql);
+		ResultQuery resultQuery = parser.parseResultQuery(sql);
+		Table table = parser.parseTable("scott.emp");
+		Field field = parser.parseField("sum(acc)");
+		Row row = parser.parseRow("('Cheese, cheddar', 398, 25, 32.2, 2.1)");
+		Condition cond = parser.parseCondition("e.acc = t.id");
+		Name name = parser.parseName("e.acc");
+
+		System.out.println("parse");
+		System.out.println(qq);
+		System.out.println("parseQuery");
+		System.out.println(query);
+		System.out.println("parseResultQuery");
+		System.out.println(resultQuery);
+		System.out.println("parseTable");
+		System.out.println(table);
+		System.out.println("parseField");
+		System.out.println(field);
+		System.out.println("parseRow");
+		System.out.println(row);
+		System.out.println("parseCondition");
+		System.out.println(cond);
+		System.out.println("parseName");
+		System.out.println(name);
+
+	}
 }
